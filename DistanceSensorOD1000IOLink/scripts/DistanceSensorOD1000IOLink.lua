@@ -42,7 +42,6 @@ gTmr:setPeriodic(true)
 
 --Start of Function and Event Scope---------------------------------------------
 
---@handleOnConnected()
 local function handleOnConnected()
   print('IO-Link device OD1000 connected')
 
@@ -67,23 +66,20 @@ local function handleOnConnected()
 end
 IOLink.RemoteDevice.register(gIoLinkDevice, 'OnConnected', handleOnConnected)
 
--- Stopping timer when IO-Link device gets disconnected
---@handleOnDisconnected()
+---Stopping timer when IO-Link device gets disconnected
 local function handleOnDisconnected()
   gTmr:stop()
   print('IO-Link device OD1000 disconnected')
 end
 IOLink.RemoteDevice.register( gIoLinkDevice, 'OnDisconnected', handleOnDisconnected )
 
---@handleOnPowerFault()
 local function handleOnPowerFault()
   print('Power fault at IO-Link device OD1000')
   gTmr:stop()
 end
 IOLink.RemoteDevice.register(gIoLinkDevice, 'OnPowerFault', handleOnPowerFault)
 
--- On every expiration of the timer, the process data of IO-Link device OD1000 is read
---@handleOnExpired()
+---On every expiration of the timer, the process data of IO-Link device OD1000 is read
 local function handleOnExpired()
   -- Reading process data
   local data,
